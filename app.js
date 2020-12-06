@@ -7,20 +7,40 @@ var undoCache = {}
 
 // alert(Object.keys(undoCache).length)
 
+function handleFlipFront(e)
+{
+  e.path[0].classList.toggle("hide");
+  e.path[1].children[1].classList.toggle("show");
+}
+
+function handleFlipBack(e)
+{
+  e.path[0].classList.toggle("show");
+  e.path[1].children[0].classList.toggle("hide")
+    
+}
+
 function refreshData()
 {
   cards = document.querySelectorAll(".card");
   cardNum = 0;
   
+  document.querySelectorAll(".front").forEach(frontCard => {
+    
+    frontCard.removeEventListener("click", handleFlipFront)
+    frontCard.addEventListener("click", handleFlipFront)
+  
+  });
+  document.querySelectorAll(".back").forEach(backCard => {
+    backCard.removeEventListener("click", handleFlipBack);
+    backCard.addEventListener("click", handleFlipBack);
+  })
   
   document.querySelector(".counter").innerHTML = cardNum+1 + " / " + (cards.length);
   if(cards.length == 0)
     {
       document.querySelector(".none").classList.remove("hide");
     }
-  
-  
-  
 }
 
 function deleteCard(e)
@@ -97,22 +117,6 @@ window.onload = (e) => {
     
     refreshData();
     })
-  
-  document.querySelectorAll(".front").forEach(frontCard => {
-    
-    frontCard.addEventListener("click", (e) => {
-      e.path[0].classList.toggle("hide");
-      e.path[1].children[1].classList.toggle("show");
-    });
-  })
-  
-  document.querySelectorAll(".back").forEach(backCard => {
-    backCard.addEventListener("click", (e) => {
-      e.path[0].classList.toggle("show");
-      
-      e.path[1].children[0].classList.toggle("hide")
-    });
-  })
   
   document.querySelectorAll(".card").forEach(card => {
     
@@ -204,16 +208,6 @@ window.onload = (e) => {
         document.querySelectorAll(".create-card")[1].classList.remove("hide");
         
         document.querySelector(".flashcards").appendChild(p);
-        
-        p.children[0].addEventListener("click", (e) => {
-          e.path[0].classList.toggle("hide");
-          e.path[1].children[1].classList.toggle("show");
-        });
-        p.children[1].addEventListener("click", (e) => {
-          e.path[0].classList.toggle("show");
-
-          e.path[1].children[0].classList.toggle("hide");
-        });
         
         document.querySelector(".rubbish").ondragover = (e) => {
           e.preventDefault();
