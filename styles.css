@@ -1,0 +1,405 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+}
+
+body {
+  overflow: hidden;
+}
+
+main {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  grid-template-columns: 1fr 3.5fr;
+}
+
+.nav {
+  height: 100vh;
+  border-right: 1.5px solid rgba(35, 35, 35, 0.1);
+}
+
+.icons {
+  color: gray;
+  width: 100%;
+  height: 1ch;
+  list-style-type: none;
+  margin: 2em 0;
+}
+
+.icon {
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  padding: 1.5em 0.5em;
+  width: calc(100%-1rem);
+  transition: background 1s ease;
+}
+.icon:hover {
+  cursor: pointer;
+}
+.icon:nth-child(1):hover {
+  color: rgba(140, 138, 185, 0.75);
+  font-weight: 600;
+  background: rgba(140, 138, 185, 0.2);
+}
+.icon:nth-child(1):hover i {
+  color: #8c8ab9;
+}
+.icon:nth-child(2):hover {
+  color: rgba(255, 152, 152, 0.75);
+  font-weight: 600;
+  background: rgba(255, 152, 152, 0.2);
+}
+.icon:nth-child(2):hover i {
+  color: #ff9898;
+}
+.icon:nth-child(3):hover {
+  color: rgba(100, 200, 100, 0.75);
+  font-weight: 600;
+  background: rgba(0, 200, 1, 0.2);
+}
+.icon:nth-child(3):hover i {
+  color: #64c864;
+}
+
+.icon i {
+  margin-left: 1em;
+}
+
+.icon span {
+  margin: 0 .5em;
+}
+
+@keyframes deleteanim {
+  from {
+    bottom: -10%;
+  }
+  to {
+    bottom: 0%;
+  }
+}
+@keyframes deleteanimgo {
+  from {
+    bottom: 0%;
+  }
+  to {
+    bottom: -10%;
+  }
+}
+.delete-popup {
+  z-index: 9;
+  transition: 500ms ease-in-out;
+  position: absolute;
+  bottom: 0%;
+  right: 0;
+  margin: .75em 1em;
+  background: #FF1744;
+  padding: 1em 1.25em 1.5em 1.25em;
+  border-radius: .3em;
+  font-family: "Montserrat",sans-serif;
+  color: white;
+  font-size: 1em;
+}
+.delete-popup span {
+  font-size: .75em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.delete-popup button {
+  cursor: pointer;
+  outline: 0;
+  border-radius: .4em;
+  color: #FF1744;
+  font-weight: 700;
+  padding: .75em .5em;
+  font-size: 1em;
+  background: white;
+  margin-left: .5em;
+  border: 3px solid white;
+}
+.delete-popup button i {
+  font-size: inherit;
+  margin: 0 .25em;
+}
+
+.flashcards {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.card__nav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 70vh;
+  background: transparent;
+  pointer-events: none;
+  display: flex;
+  gap: clamp(50px, 5vw, 100px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+main button {
+  position: absolute;
+  z-index: 3;
+  font-weight: 600;
+  font-family: "Open Sans",sans-serif;
+  color: #3F51B5;
+  bottom: 0;
+  margin-bottom: 10vh;
+}
+
+.create-card__screen {
+  position: relative;
+  transition: opacity 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  z-index: 2;
+}
+.create-card__screen label {
+  position: relative;
+  width: 75%;
+  height: 35vh;
+  font-size: 1em;
+  margin: 4vh 0;
+}
+.create-card__screen label span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: left;
+  pointer-events: none;
+  width: 100%;
+  max-width: 600px;
+  outline: 0;
+  border: 0;
+  margin-top: 1em;
+  color: #8c8ab9;
+  font-size: .8em;
+  z-index: 1;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+}
+.create-card__screen textarea {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: space-around;
+  border-radius: 50px;
+  box-shadow: 2px -2px 20px #d9d9d9,  -2px 2px 20px #ffffff;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  font-size: 1em;
+  overflow-y: visible;
+  resize: none;
+  border-radius: .5em;
+  width: 100%;
+  max-width: 600px;
+  outline: 0;
+  border: 0;
+  height: 100%;
+  padding: 0 1em 0 1em;
+}
+.create-card__screen button {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3em;
+  padding: 1em;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  background: #8c8ab9;
+  color: white;
+  border-radius: .2em;
+}
+.create-card__screen button i {
+  margin: 0 1em 0 0;
+}
+
+.none {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  font-family: "Montserrat",sans-serif;
+  color: rgba(3, 3, 3, 0.5);
+}
+.none h3 {
+  font-size: 1.1em;
+  font-weight: 400;
+}
+
+.create-card {
+  display: flex;
+  justify-self: space-around;
+  align-self: center;
+  border-radius: .2em;
+  margin-top: 1em;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  padding: 1em;
+  background: rgba(140, 138, 185, 0.5);
+  color: rgba(140, 138, 185, 0.8);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+.rubbish {
+  position: fixed;
+  z-index: 999;
+  display: none;
+  left: 60vw;
+  top: 0;
+  transform: translate(-50%, -50%);
+  color: #FF1744;
+  width: 1ch;
+  height: 1ch;
+  margin-top: 2em;
+  padding: 1em;
+}
+
+.fa-trash {
+  font-size: 2em;
+}
+
+.card:active {
+  cursor: pointer;
+}
+
+.display-show {
+  display: flex;
+}
+
+.card {
+  position: relative;
+  cursor: pointer;
+  width: 50vw;
+  height: 30vh;
+  display: flex;
+  transform: translateY(-15vh);
+  transition: 600ms ease-out;
+}
+
+.front, .back {
+  border-radius: 50px;
+  box-shadow: 2px -2px 20px #d9d9d9,  -2px 2px 20px #ffffff;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  font-size: 1.25em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: .5em;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  padding: 2em 1em;
+  backface-visibility: hidden;
+  position: relative;
+  transition: 600ms ease;
+  transform-origin: center;
+  z-index: 999;
+  pointer-events: all;
+}
+
+.front__content, .back__content {
+  pointer-events: none;
+}
+
+.front {
+  transform: perspective(600px);
+}
+
+.back {
+  transform: perspective(600px) rotateX(180deg);
+  display: none;
+}
+
+.hide {
+  display: none;
+  opacity: 0;
+  transform: perspective(600px) rotateX(180deg);
+  transition: all 400ms ease-in-out;
+}
+
+.show {
+  padding: 2em 1em;
+  transform: perspective(600px) rotateX(0);
+  transition: all 400ms ease-in-out;
+  display: flex;
+}
+
+i:hover {
+  cursor: pointer;
+  color: #3F51B5;
+}
+
+.fa-arrow-left {
+  position: relative;
+  width: 1ch;
+  z-index: 1;
+  color: rgba(0, 0, 0, 0.25);
+  pointer-events: all;
+}
+
+.fa-arrow-right {
+  position: relative;
+  bottom: 0;
+  width: 1ch;
+  z-index: 1;
+  color: rgba(0, 0, 0, 0.25);
+  pointer-events: all;
+}
+
+.counter {
+  pointer-events: none;
+  position: relative;
+  font-weight: 600;
+  font-family: "Open Sans",sans-serif;
+  color: #3F51B5;
+}
+
+@media only screen and (max-width: 620px) {
+  main {
+    grid-template-columns: 1fr 6fr;
+  }
+
+  .icons i {
+    font-size: 1.5em;
+  }
+
+  .icons span {
+    display: none;
+  }
+}
+.card-rotate {
+  opacity: 0.5;
+  transform: scale(1.1) perspective(600px) rotateZ(-5deg);
+  transition: 350ms ease-in-out;
+}
+
+.trash-enlarge {
+  border-bottom: 1px solid #FF1744;
+  color: #FF1344;
+}
