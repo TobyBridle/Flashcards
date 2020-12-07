@@ -393,6 +393,26 @@ i:hover {
     display: none;
   }
 }
+@media only screen and (max-width: 500px) {
+  main {
+    grid-template-columns: 0 1fr;
+  }
+
+  .icons {
+    position: relative;
+    transform: translateY(85vh);
+    width: 100%;
+    height: 100%;
+    gap: 20vw;
+    background: red;
+    display: flex;
+    flex-direction: row;
+    z-index: 5;
+  }
+  .icons .icon:hover {
+    background: none;
+  }
+}
 .card-rotate {
   opacity: 0.5;
   transform: scale(1.1) perspective(600px) rotateZ(-5deg);
