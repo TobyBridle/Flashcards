@@ -69,6 +69,15 @@ function deleteCard(e)
 window.onload = (e) => {
   refreshData();
   
+  // Mobile Hamburger Menu
+  
+  document.querySelector(".mobile-toggle").addEventListener("click", () => {
+    document.querySelector(".mobile-toggle").classList.toggle("move-hamburger")
+    document.getElementsByTagName("main")[0].classList.toggle("move")
+    document.querySelector(".nav").classList.toggle("move")
+    
+  })
+  
   // Save File Event Listener
   
   document.querySelector(".save").addEventListener("click", () => {
