@@ -1,6 +1,6 @@
 <?php
 
-$c = new mysqli("placeholder", "placeholder", "placeholder", "placeholder_flashcards");
+$c = new mysqli("placeholder", "placeholder", "placeholder", "placeholder");
 
 if($c)
 {
