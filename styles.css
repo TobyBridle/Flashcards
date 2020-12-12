@@ -46,6 +46,8 @@ main {
   cursor: pointer;
 }
 .icon:nth-child(1):hover {
+  width: 100%;
+  border-left: 0.75vw solid #8c8ab9;
   color: rgba(140, 138, 185, 0.75);
   font-weight: 600;
   background: rgba(140, 138, 185, 0.2);
@@ -54,6 +56,8 @@ main {
   color: #8c8ab9;
 }
 .icon:nth-child(2):hover {
+  width: 100%;
+  border-left: 0.75vw solid #ff9898;
   color: rgba(255, 152, 152, 0.75);
   font-weight: 600;
   background: rgba(255, 152, 152, 0.2);
@@ -62,6 +66,8 @@ main {
   color: #ff9898;
 }
 .icon:nth-child(3):hover {
+  width: 100%;
+  border-left: 0.75vw solid #64c864;
   color: rgba(100, 200, 100, 0.75);
   font-weight: 600;
   background: rgba(0, 200, 1, 0.2);
@@ -94,40 +100,69 @@ main {
     bottom: -10%;
   }
 }
+.delete-container {
+  position: absolute;
+  width: 100%;
+  z-index: 9;
+}
+
 .delete-popup {
   z-index: 9;
-  transition: 500ms ease-in-out;
   position: absolute;
-  bottom: 0%;
+  margin-top: 1vh;
+  margin-right: 1vw;
   right: 0;
-  margin: .75em 1em;
+  width: 50vw;
+  height: 8vh;
+  display: flex;
+  align-items: center;
   background: #FF1744;
-  padding: 1em 1.25em 1.5em 1.25em;
-  border-radius: .3em;
-  font-family: "Montserrat",sans-serif;
+  border-left: 1vw solid #DA133A;
+  padding: 0 2vw;
+}
+.delete-popup .fa-exclamation {
+  margin: 0 1vw;
+  color: #DA133A;
+  width: 1ch;
+  height: 1ch;
+  padding: 0.4em;
+  font-size: 0.75em;
+  border-radius: 50%;
+  background: #DA133A;
   color: white;
-  font-size: 1em;
+  text-align: center;
 }
 .delete-popup span {
-  font-size: .75em;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
 }
 .delete-popup button {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  right: 0;
+  top: 0;
+  width: 30%;
+  height: 100%;
+  border-radius: .25em;
+  border: 0;
   outline: 0;
-  border-radius: .4em;
-  color: #FF1744;
-  font-weight: 700;
-  padding: .75em .5em;
-  font-size: 1em;
-  background: white;
-  margin-left: .5em;
-  border: 3px solid white;
+  background: #DA133A;
+  color: white;
+}
+.delete-popup button:hover {
+  background: #EF1744;
 }
 .delete-popup button i {
-  font-size: inherit;
-  margin: 0 .25em;
+  color: white;
+  margin-right: 1vw;
+}
+.delete-popup button p {
+  font-size: .9em;
 }
 
 .flashcards {
@@ -244,6 +279,7 @@ main button {
   border-radius: .2em;
 }
 .create-card__screen .addCard i {
+  color: white;
   margin: 0 1em 0 0;
 }
 .create-card__screen .removeCard {
@@ -264,6 +300,7 @@ main button {
   border-radius: .2em;
 }
 .create-card__screen .removeCard i {
+  color: white;
   margin: 0 1em 0 0;
 }
 
