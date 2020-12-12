@@ -5,6 +5,23 @@ var jCard;
 
 var undoCache = {}
 
+function FitToContent(id, maxHeight)
+{
+   var text = id && id.style ? id : document.getElementById(id);
+   if ( !text )
+      return;
+
+   var adjustedHeight = text.clientHeight;
+   if ( !maxHeight || maxHeight > adjustedHeight )
+   {
+      adjustedHeight = Math.max(text.scrollHeight, adjustedHeight);
+      if ( maxHeight )
+         adjustedHeight = Math.min(maxHeight, adjustedHeight);
+      if ( adjustedHeight > text.clientHeight )
+         text.style.height = adjustedHeight + "px";
+   }
+}
+
 // alert(Object.keys(undoCache).length)
 
 function handleFlipFront(e)
@@ -69,6 +86,12 @@ function deleteCard(e)
 window.onload = (e) => {
   refreshData();
   
+  [...document.getElementsByTagName("textarea")].forEach(txtAr => {
+    txtAr.onkeypress = function() {
+      FitToContent( this, 150 )
+    };
+  })
+  
   // Mobile Hamburger Menu
   
   document.querySelector(".mobile-toggle").addEventListener("click", () => {
@@ -92,6 +115,7 @@ window.onload = (e) => {
   
   document.querySelector(".open").addEventListener("click", () => {
     
+    alert(jCard)
     let jToHTML = JSON.parse(jCard);
     jToHTML['cardsEl'].forEach(card => {
 
@@ -171,6 +195,22 @@ window.onload = (e) => {
     {
       document.querySelector(".none").classList.remove("hide");
     }
+  
+  document.querySelector(".cancelCard").addEventListener("click", () => {
+    
+    document.getElementsByTagName("textarea")[0].value = ""
+    document.getElementsByTagName("textarea")[1].value = ""
+    
+    document.querySelector(".create-card__screen").classList.add("hide");
+    document.querySelector(".create-card__screen").classList.remove("create-anim");
+    
+    document.querySelectorAll(".create-card")[1].classList.remove("hide");
+    
+    refreshData();
+    document.querySelector(".card__nav").classList.remove("hide");
+    document.querySelector(".card").classList.remove("hide");
+  })
+  
   document.querySelectorAll(".createCard")[0].addEventListener("click", () => {
     if(document.getElementsByTagName('textarea')[0].value.length > 0 && document.getElementsByTagName('textarea')[1].value.length > 0)
       {
@@ -254,7 +294,6 @@ window.onload = (e) => {
     document.querySelector(".none").classList.add("hide")
     document.querySelector(".create-card__screen").classList.add("create-anim");
     document.querySelector(".create-card__screen").classList.remove("hide");
-    document.getElementsByTagName("textarea")[0].innerText = "";
 
     document.querySelector(".card__nav").classList.add("hide")
      
@@ -265,7 +304,8 @@ window.onload = (e) => {
     document.querySelector(".none").classList.add("hide")
     document.querySelector(".card__nav").classList.add("hide")
     
-    document.getElementsByTagName("textarea")[0].innerText = "";
+    document.getElementsByTagName("textarea")[0].value = "";
+    document.getElementsByTagName("textarea")[1].value = "";
     
     document.querySelectorAll(".card").forEach(card => {
       card.classList.add("hide");
@@ -292,6 +332,9 @@ window.onload = (e) => {
       }
       cards[cardNum+1].classList.add("hide");
       cards[cardNum].classList.remove("hide");
+    
+      cards[cards.length-1].children[0].classList.remove("hide");
+      cards[cards.length-1].children[1].classList.add("hide");
     
       document.querySelector(".counter").innerHTML = `${cardNum+1} / ${cards.length}`
     
