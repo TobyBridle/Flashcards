@@ -1,5 +1,9 @@
 * { padding: 0; margin: 0; font-size: 16px;}
 
+:root {
+  --height: 3ch;
+}
+
 body {
   overflow: hidden;
 }
@@ -190,17 +194,32 @@ main button {
   z-index:2;
   
   & label {
-    position: relative;
-    width: 75%;
+    width: 40vw;
     height: 35vh;
-    font-size: 1em;
     
+    position: relative;
+    font-size: 1em;
+    border-radius: 50px;
+    box-shadow:  2px -2px 20px #d9d9d9, 
+                 -2px 2px 20px #ffffff;
+    font-family:"Montserrat", sans-serif;
+    
+    text-align:center;
+    font-size: 1em;
+    overflow-y: visible;
+    resize: none;
+    border-radius:.5em;
+    max-width: 600px;
+    outline:0;
+    border:0;
+    padding:0 1em 0 1em;
+  
     margin: 4vh 0;
     
     & span {
       
       position: absolute;
-      left: 50%;
+      left: 60%;
       transform: translateX(-50%);
       text-align: left;
       pointer-events: none;
@@ -217,42 +236,74 @@ main button {
       font-weight:700;
       font-family: "Montserrat", sans-serif;
     }
-  }
   
-  
-  & textarea {
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    justify-content:space-around;
-    border-radius: 50px;
-    box-shadow:  2px -2px 20px #d9d9d9, 
-                 -2px 2px 20px #ffffff;
-    font-family:"Montserrat", sans-serif;
+    & textarea {
+      position:relative;
+      resize:none;
+      outline:0;
+      
+      text-align:center;
+      
+      border:0;
+      
+      top:50%;
+      transform:translateY(-50%);
+      
+      width:100%;
+      height:var(--height);
+      
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
     
-    text-align:center;
-    font-size: 1em;
-    overflow-y: visible;
-    resize: none;
-    border-radius:.5em;
-    width:100%;
-    max-width: 600px;
-    outline:0;
-    border:0;
-    height:100%;
-    padding:0 1em 0 1em;
+    
   }
   
-  & button {
+  
+  & .addCard {
     position: absolute;
+    transform: translateX(-35%);
     display:flex;
     justify-content:space-between;
-    margin-bottom: 3em;
-    padding: 1em;
+    margin-bottom: 3vh;
+    
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    
     cursor:pointer;
     border:0;
     outline:0;
     background: rgba(140,138,185,1);
+    color:white; 
+    border-radius: .2em;
+    
+    & i {
+      margin: 0 1em 0 0;
+    }
+    
+  }
+  
+  & .removeCard {
+    position: absolute;
+    transform: translateX(85%);
+    display:flex;
+    justify-content:space-between;
+    margin-bottom: 3vh;
+    
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
+    
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    
+    cursor:pointer;
+    border:0;
+    outline:0;
+    background: #D32F2F;
     color:white; 
     border-radius: .2em;
     
@@ -349,9 +400,11 @@ main button {
   border-radius:.5em;
   width:100%;
   height:100%;
-  overflow-y: auto;
   overflow-wrap: anywhere;
   padding:2em 1em;
+  
+  overflow-y: auto;
+  
   backface-visibility:hidden;
   position: relative;
   transition: 600ms ease;
@@ -361,7 +414,15 @@ main button {
 }
 
 .front__content, .back__content {
+  height:100%;
+  width:100%;
+  
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
   pointer-events:none;
+  
 }
 
 .front {
@@ -482,9 +543,6 @@ i:hover {
     width:100%;
     
   }
-  
-  .front__content,.back__content {
-padding-top: 1.5em;}
 
 }
 
