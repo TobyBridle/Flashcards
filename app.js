@@ -37,6 +37,25 @@ function handleFlipBack(e)
     
 }
 
+function handleDelete()
+{
+  let el = undoCache[Object.keys(undoCache).length]
+  if(cards.length > 0)
+  {
+    el.classList.add("hide");
+  } else {
+    document.querySelector(".none").classList.add("hide");
+    el.classList.remove("hide");
+
+  }
+  document.querySelector(".flashcards").appendChild(el);
+  delete undoCache[Object.keys(undoCache).length]
+  document.querySelector(".delete-popup").classList.add("hide");
+  
+  refreshData();
+  
+}
+
 function refreshData()
 {
   cards = document.querySelectorAll(".card");
@@ -58,28 +77,46 @@ function refreshData()
     {
       document.querySelector(".none").classList.remove("hide");
     }
+
+  if(document.querySelector(".undo-delete")){
+    document.querySelectorAll(".undo-delete").forEach(undoBtn => {
+      undoBtn.removeEventListener("click", handleDelete);
+      undoBtn.addEventListener("click", handleDelete);
+  });
+  
+  }
 }
 
-function deleteCard(e)
+async function deleteCard(e)
 {
   if(confirm("Are you Sure you want to delete the Flashcard?"))
   {
+    document.querySelector(".delete-container").classList.remove("hide")
     let el = document.getElementById(e.dataTransfer.getData("text"))
     el.parentNode.removeChild(el);
 
     // Add to Undo Storage
 
     undoCache[Object.keys(undoCache).length+1] = el;
-    console.log(undoCache)
     if(document.querySelector(".card")) document.querySelector(".card").classList.remove("hide");
     refreshData();
 
     // Show Popup
-
-    document.querySelector(".delete-popup").classList.remove("hide")
+    let deletePopup = `<div class=\"delete-popup\">
+    <span><i class=\"fas fa-exclamation\"></i>Flashcard Deleted</span>
+    <button class=\"undo-delete\">
+      <i class=\"fas fa-undo\"></i>
+      <p>UNDO</p>
+    </button>
+    </div>
+    <br/><br/><br/>`
+    document.querySelector(".delete-container").innerHTML += deletePopup
+    console.log(document)
+    refreshData()
     setTimeout(() => {
-      document.querySelector(".delete-popup").classList.add("hide");
-    }, 2000)
+      document.querySelector(".delete-container").classList.add("hide")
+      document.querySelector(".delete-container").remove(document.querySelector(".delete-container").lastChild);
+    }, 5000)
   }
 }
 
@@ -133,23 +170,6 @@ window.onload = (e) => {
     document.querySelectorAll(".create-card")[0].classList.add("hide");
     document.querySelector(".card__nav").classList.add("hide");
   }
-  document.querySelector(".undo-delete").addEventListener("click", () => {
-    
-    let el = undoCache[Object.keys(undoCache).length]
-    if(cards.length > 0)
-      {
-        el.classList.add("hide");
-      } else {
-        document.querySelector(".none").classList.add("hide");
-        el.classList.remove("hide");
-      
-      }
-    document.querySelector(".flashcards").appendChild(el);
-    delete undoCache[Object.keys(undoCache).length]
-    document.querySelector(".delete-popup").classList.add("hide");
-    
-    refreshData();
-    })
   
   document.querySelectorAll(".card").forEach(card => {
     
