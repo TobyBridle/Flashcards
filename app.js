@@ -56,6 +56,53 @@ function handleDelete()
   
 }
 
+function handleLeft()
+{
+  if(cardNum <= 0)
+      {
+        cardNum = cards.length-1;
+        cards.forEach(c => {
+          c.classList.add("hide");
+        });
+        
+        cards[cards.length-1].classList.remove("hide");
+        document.querySelector(".counter").innerHTML = `${cards.length} / ${cards.length}`
+        return 1;
+      } else {
+        cardNum-=1;
+      }
+      cards[cardNum+1].classList.add("hide");
+      cards[cardNum].classList.remove("hide");
+    
+      cards[cards.length-1].children[0].classList.remove("hide");
+      cards[cards.length-1].children[1].classList.add("hide");
+    
+      document.querySelector(".counter").innerHTML = `${cardNum+1} / ${cards.length}`
+    
+}
+
+function handleRight()
+{
+  if(cardNum+1 >= cards.length)
+      {
+        cardNum=0;
+        cards.forEach(c => {
+          c.classList.add("hide");
+        })
+        cards[0].classList.remove("hide");
+        
+      document.querySelector(".counter").innerHTML = cardNum+1 + " / " + cards.length;
+        return 1;
+      } else {
+        cardNum+=1;
+      }
+      document.querySelector(".counter").innerHTML = cardNum+1 + " / " + cards.length;
+      
+      cards[cardNum-1].classList.add("hide");
+      cards[cardNum].classList.remove("hide");
+    
+}
+
 function refreshData()
 {
   cards = document.querySelectorAll(".card");
@@ -122,6 +169,22 @@ async function deleteCard(e)
 
 window.onload = (e) => {
   refreshData();
+  
+  // Arrow Keypress to Change Card
+  window.onkeydown = (e) => {
+    if(e.path[0].tagName == "BODY")
+      {
+      switch(e.code)
+        {
+          case "ArrowLeft":
+            handleLeft();
+            break;
+          case "ArrowRight":
+            handleRight();
+            break;
+        }
+      }
+  }
   
   [...document.getElementsByTagName("textarea")].forEach(txtAr => {
     txtAr.onkeypress = function() {
@@ -336,50 +399,9 @@ window.onload = (e) => {
      
   })
   
-  document.querySelector(".fa-arrow-left").addEventListener("click", () => {
-    if(cardNum <= 0)
-      {
-        cardNum = cards.length-1;
-        cards.forEach(c => {
-          c.classList.add("hide");
-        });
-        
-        cards[cards.length-1].classList.remove("hide");
-        document.querySelector(".counter").innerHTML = `${cards.length} / ${cards.length}`
-        return 1;
-      } else {
-        cardNum-=1;
-      }
-      cards[cardNum+1].classList.add("hide");
-      cards[cardNum].classList.remove("hide");
-    
-      cards[cards.length-1].children[0].classList.remove("hide");
-      cards[cards.length-1].children[1].classList.add("hide");
-    
-      document.querySelector(".counter").innerHTML = `${cardNum+1} / ${cards.length}`
-    
-  })
+  document.querySelector(".fa-arrow-left").addEventListener("click", handleLeft);
   
-  document.querySelector(".fa-arrow-right").addEventListener("click", () => {
-    if(cardNum+1 >= cards.length)
-      {
-        cardNum=0;
-        cards.forEach(c => {
-          c.classList.add("hide");
-        })
-        cards[0].classList.remove("hide");
-        
-      document.querySelector(".counter").innerHTML = cardNum+1 + " / " + cards.length;
-        return 1;
-      } else {
-        cardNum+=1;
-      }
-      document.querySelector(".counter").innerHTML = cardNum+1 + " / " + cards.length;
-      
-      cards[cardNum-1].classList.add("hide");
-      cards[cardNum].classList.remove("hide");
-    
-  })
+  document.querySelector(".fa-arrow-right").addEventListener("click", handleRight);
   
   
   
