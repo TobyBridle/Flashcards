@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  position: absolute;
+  width: 75vw;
+  min-width: 300px;
+  max-width: 700px;
+  height: 75vh;
+  box-shadow: 10px 10px 20px rgba(37, 37, 37, 0.15), 0px 0px 10px rgba(10, 10, 10, 0.05);
+  padding: 3vw 3vh;
+}
+
+form, h1 {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form input {
+  border: 0;
+  margin: 1vh 0;
+  outline: 0;
+  background: rgba(10, 10, 10, 0.05);
+  border-radius: 5px;
+  height: 7.5vh;
+  width: 25vw;
+  min-width: 200px;
+  max-width: 300px;
+  padding: 3vh 2vw;
+  margin-top: 2.5vh;
+}
+
+form input:focus {
+  border: 1.5px solid #D3D3D3;
+}
+
+form input[type="text"] {
+  margin-top: 7vh;
+}
+
+form button {
+  margin-top: 5vh;
+  outline: 0;
+  border: 0;
+  padding: 1vh 1vw;
+  height: 6vh;
+  width: 75%;
+  min-width: 50px;
+  max-width: 200px;
+  background: rgba(100, 200, 100, 0.2);
+  font-weight: 600;
+  color: #64c864;
+  cursor: pointer;
+}
+
+form button:active {
+  background: rgba(100, 200, 100, 0.5);
+}
+
+form button:hover {
+  background: rgba(100, 200, 100, 0.3);
+}
+
+form .no-account {
+  font-size: 1em;
+  position: absolute;
+  margin-bottom: 3vh;
+  bottom: 0;
+}
+
+form .no-account a {
+  color: #64c864;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+form .username-error {
+  font-size: .75em;
+  position: relative;
+  width: 25vw;
+  min-width: 200px;
+  max-width: 300px;
+  color: #ff9898;
+}
+
+form .password-error {
+  font-size: .75em;
+  position: relative;
+  width: 25vw;
+  min-width: 200px;
+  max-width: 300px;
+  color: #ff9898;
+}
+
+.input-error {
+  border: 2px solid #ff9898;
+}
+
+.input-error::placeholder {
+  color: #ff9898;
+}
